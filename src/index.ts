@@ -365,6 +365,10 @@ async function main(): Promise<void> {
 		});
 
 		app.all('/mcp', async (req: Request, res: Response) => {
+			if (req.method === 'GET') {
+  res.json({ name: 'whoop-mcp-server', version: '1.0.0' });
+  return;
+}
 			const sessionId = req.headers['mcp-session-id'] as string | undefined;
 
 			if (req.method === 'DELETE' && sessionId && transports.has(sessionId)) {
